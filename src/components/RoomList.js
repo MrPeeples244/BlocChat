@@ -48,8 +48,14 @@ class RoomList extends Component {
           </ul>
 
           <form onSubmit={ (e) => this.handleSubmit(e) }>
-            <input type="text" value={this.state.newRoom} placeholder="Start a New Chat!" onChange={this.handleChange.bind(this) }/>
-            <input type="submit" value="Create Room"/>
+            <input type="text"
+                   value={this.state.newRoom}
+                   placeholder="Start a New Chat!"
+                   onChange={this.handleChange.bind(this)}
+            />
+            <input type="submit"
+                   value="Create Room"
+            />
           </form>
         </aside>
       );

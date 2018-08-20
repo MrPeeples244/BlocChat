@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import '../styles/messageList.css';
 
 
 class MessageList extends Component {
@@ -28,7 +29,7 @@ class MessageList extends Component {
     if(this.state.newMessage){
       const newText = {
         content: this.state.newMessage,
-        username: this.props.user.displayName || 'Guest user',
+        username: this.props.user ? this.props.user.displayName : 'Guest User',
         roomId: this.props.activeRoom.key,
         sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
       }
@@ -41,9 +42,6 @@ class MessageList extends Component {
     e.preventDefault();
     this.setState({ newMessage: e.target.value });
   }
-
-
-
 
   render() {
     let time = function(message) {
@@ -58,26 +56,29 @@ class MessageList extends Component {
     };
     if(this.props.activeRoom){
     return (
-      <main>
-        <h2>{this.props.activeRoom.name}</h2>
-        <ul className='messages-list'>
+      <main className='main'>
+        <div id='room-title-banner'>
+          <h2 id='room-title'>{this.props.activeRoom.name}</h2>
+        </div>
+        <ul id='messages-list'>
           {this.state.messages
             .filter(message => this.props.activeRoom.key === message.roomId )
             .map( message =>
-            <li key={message.key}>
-              <div>{message.username}</div>
-              <div>{message.content}</div>
-              <div>{time(message)}</div>
+            <li id='message' key={message.key}>
+              <div className="message-user">{message.username}</div>
+              <div className="message-content">{message.content}</div>
+              <div className="message-time">{time(message)}</div>
             </li>
             )}
         </ul>
-        <div>
-
+        <div className='new-message-form-container'>
           <form onSubmit={ (e) => this.createMessage(e) }>
-            <input type="text"
+            <input id='message-text-input'
+                   type="text"
                    value={this.state.newMessage}
                    onChange={ (e) => this.handleChange(e) }
                    placeholder="Start Typing!"
+                   size="100"
             />
             <input type="submit"
                    value="Send"
@@ -89,20 +90,13 @@ class MessageList extends Component {
   }
   else{
     return (
-      <main>
-        <h2>{this.props.activeRoom.name}</h2>
-        <ul className='messages-list'>
-          {this.state.messages
-            .filter(message => this.props.activeRoom.key === message.roomId )
-            .map( message =>
-            <li key={message.key}>
-              <div>{message.username}</div>
-              <div>{message.content}</div>
-              <div>{time(message)}</div>
-            </li>
-            )}
-        </ul>
-      </main>  
+      <main className="main">
+        <div id='banner'>
+          <div id='banner-text'>Select a room or start a new one to begin!</div>
+        </div>
+        <div id='buffer'></div>
+        <div id='banner-low'></div>
+      </main>
       );
   }
   }

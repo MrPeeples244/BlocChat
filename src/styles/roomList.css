@@ -1,0 +1,39 @@
+#title {
+  align-self: center;
+}
+
+.room-list {
+  list-style: none;
+  text-align: center;
+  padding: 0px;
+}
+
+.room-buttons {
+  margin: 3px;
+}
+
+.new-room-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#new-chat-field {
+  width: 70%;
+  margin: 5px;
+  align-self: center;
+}
+
+#create-room-button {
+  width: 40%;
+  margin: 5px;
+  align-self: center;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+h2 {
+  padding:5px;
+  margin:10px;
+  align-self: center;
+}
